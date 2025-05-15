@@ -30,3 +30,7 @@ models:
     gold:
       +schema: gld
       +materialized: table
+
+    snapshots:
+      +schema: snapshot
+      +materialized: snapshot
