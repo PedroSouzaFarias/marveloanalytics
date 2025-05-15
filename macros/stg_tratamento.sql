@@ -1,5 +1,5 @@
 {% macro tratar_string(nome_coluna) %} 
-    UPPER(TRIM({{ nome_coluna }})) 
+    LEFT(UPPER(TRIM({{ nome_coluna }})), 100)
 {% endmacro %}
 
 {% macro extrair_data(nome_coluna) %}
