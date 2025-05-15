@@ -25,6 +25,10 @@ sources:
             description: "Idade do usuário."
           - name: id_campanha
             description: "FK para campanha aplicada ao usuário."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'campanha')
+                  field: id_campanha
 
       - name: campanha
         description: "Campanhas de marketing."
@@ -63,6 +67,10 @@ sources:
             description: "Quantidade disponível em estoque."
           - name: id_campanha
             description: "FK opcional para campanha promocional vinculada ao produto."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'campanha')
+                  field: id_campanha
 
       - name: pedido
         description: "Pedidos realizados pelos usuários."
@@ -74,6 +82,10 @@ sources:
               - not_null
           - name: id_usuario
             description: "FK para o usuário que realizou o pedido."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'usuario')
+                  field: id_usuario
           - name: data_pedido
             description: "Data e hora em que o pedido foi feito."
           - name: status
@@ -91,8 +103,16 @@ sources:
               - not_null
           - name: id_pedido
             description: "FK para o pedido."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'pedido')
+                  field: id_pedido
           - name: id_produto
             description: "FK para o produto comprado."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'produto')
+                  field: id_produto
           - name: quantidade
             description: "Quantidade comprada do produto."
           - name: preco_unitario
@@ -108,6 +128,10 @@ sources:
               - not_null
           - name: id_usuario
             description: "FK para o usuário que navegou."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'usuario')
+                  field: id_usuario
           - name: timestamp
             description: "Momento da navegação."
           - name: pagina
