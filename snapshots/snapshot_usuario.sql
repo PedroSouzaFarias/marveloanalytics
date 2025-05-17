@@ -5,7 +5,7 @@
     target_database='marveloanalytics',
     unique_key='id_usuario',
     strategy='check',
-    check_cols=['nome', 'email', 'genero', 'idade']
+    check_cols=['nome', 'email', 'genero']
     )
 }}
 
