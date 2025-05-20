@@ -31,3 +31,4 @@ SELECT
 FROM logs lo
 LEFT JOIN pedidos pe
     ON lo.id_usuario = pe.id_usuario
+ORDER BY total_paginas_acessadas DESC
