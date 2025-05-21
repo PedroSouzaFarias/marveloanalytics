@@ -37,9 +37,9 @@ SELECT
   uc.mes_cadastro,
   uc.qtd_usuario AS usuarios_campanha_mes,
   tm.total_usuarios_mes,
-  ROUND(uc.qtd_usuario * 100.0 / tm.total_usuarios_mes, 2) AS pct_participacao_total_mes,
+  ROUND(uc.qtd_usuario / tm.total_usuarios_mes, 2) AS pct_participacao_total_mes, -- Não multiplicar por 100
   cm.total_usuarios_canal_mes,
-  ROUND(uc.qtd_usuario * 100.0 / cm.total_usuarios_canal_mes, 2) AS pct_participacao_dentro_do_canal
+  ROUND(uc.qtd_usuario / cm.total_usuarios_canal_mes, 2) AS pct_participacao_dentro_do_canal  -- Não multiplicar por 100
 FROM usuario_campanha uc
 JOIN total_mes tm
   ON uc.mes_cadastro = tm.mes_cadastro
