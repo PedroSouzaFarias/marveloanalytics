@@ -4,7 +4,8 @@ Este repositório contém o código e os recursos de um projeto completo de enge
 
 **Para uma descrição completa do projeto, incluindo a arquitetura detalhada, as ferramentas utilizadas, a metodologia passo a passo e os principais insights de negócio extraídos, consulte o artigo completo no Medium:**
 
-👉 https://medium.com/@pedrohenriquelustosa/projeto-de-engenharia-e-análise-de-dados-9c30242a01c7👈
+👉 https://medium.com/@pedrohenriquelustosa/projeto-de-engenharia-e-análise-de-dados-9c30242a01c7 👈
+
 
 ## Tecnologias Chave Utilizadas:
 
