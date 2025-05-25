@@ -1,0 +1,144 @@
+version: 2
+
+sources:
+  - name: marvelo
+    description: "Dados brutos do E-commerce da Marvelo"
+    schema: dw_marvelo
+    tables:
+      - name: usuario
+        description: "Tabela com dados dos usuários cadastrados."
+        columns:
+          - name: id_usuario
+            description: "Chave primária do usuário."
+            tests:
+              - unique
+              - not_null
+          - name: nome
+            description: "Nome completo do usuário."
+          - name: email
+            description: "Endereço de e-mail."
+          - name: data_cadastro
+            description: "Data em que o usuário foi cadastrado."
+          - name: genero
+            description: "Gênero do usuário."
+          - name: idade
+            description: "Idade do usuário."
+          - name: id_campanha
+            description: "FK para campanha aplicada ao usuário."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'campanha')
+                  field: id_campanha
+
+      - name: campanha
+        description: "Campanhas de marketing."
+        columns:
+          - name: id_campanha
+            description: "Chave primária da campanha."
+            tests:
+              - unique
+              - not_null
+          - name: nome_campanha
+            description: "Nome da campanha."
+          - name: canal
+            description: "Canal de divulgação."
+          - name: data_inicio
+            description: "Data de início da campanha."
+          - name: data_fim
+            description: "Data de término da campanha."
+          - name: tipo
+            description: "Tipo de campanha (desconto, brinde, etc)."
+
+      - name: produto
+        description: "Tabela com catálogo de produtos."
+        columns:
+          - name: id_produto
+            description: "Chave primária do produto."
+            tests:
+              - unique
+              - not_null
+          - name: nome_produto
+            description: "Nome do produto."
+          - name: categoria
+            description: "Categoria do produto."
+          - name: preco
+            description: "Preço atual do produto."
+          - name: estoque
+            description: "Quantidade disponível em estoque."
+          - name: id_campanha
+            description: "FK opcional para campanha promocional vinculada ao produto."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'campanha')
+                  field: id_campanha
+
+      - name: pedido
+        description: "Pedidos realizados pelos usuários."
+        columns:
+          - name: id_pedido
+            description: "Chave primária do pedido."
+            tests:
+              - unique
+              - not_null
+          - name: id_usuario
+            description: "FK para o usuário que realizou o pedido."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'usuario')
+                  field: id_usuario
+          - name: data_pedido
+            description: "Data e hora em que o pedido foi feito."
+          - name: status
+            description: "Status atual do pedido."
+          - name: valor_total
+            description: "Valor total do pedido."
+
+      - name: item_pedido
+        description: "Itens que compõem os pedidos."
+        columns:
+          - name: id_item
+            description: "Chave primária do item no pedido."
+            tests:
+              - unique
+              - not_null
+          - name: id_pedido
+            description: "FK para o pedido."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'pedido')
+                  field: id_pedido
+          - name: id_produto
+            description: "FK para o produto comprado."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'produto')
+                  field: id_produto
+          - name: quantidade
+            description: "Quantidade comprada do produto."
+          - name: preco_unitario
+            description: "Preço do produto no momento do pedido."
+
+      - name: logs_navegacao
+        description: "Registros de navegação dos usuários."
+        columns:
+          - name: id_log
+            description: "Chave primária do log."
+            tests:
+              - unique
+              - not_null
+          - name: id_usuario
+            description: "FK para o usuário que navegou."
+            tests:
+              - relationships:
+                  to: source('marvelo', 'usuario')
+                  field: id_usuario
+          - name: timestamp
+            description: "Momento da navegação."
+          - name: pagina
+            description: "Página acessada."
+          - name: tempo_sessao_seg
+            description: "Duração da sessão em segundos."
+          - name: dispositivo
+            description: "Dispositivo utilizado."
+          - name: origem
+            description: "Origem da visita (orgânica, campanha, etc)."
