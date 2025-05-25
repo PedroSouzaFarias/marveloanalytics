@@ -1,12 +1,12 @@
 -- SILVER 
--- Quais categorias de produto mais vendem por canal de campanha?
+-- Quais categorias de produto mais vendem por canal?
 {{ config (
     materialized = 'table'
     )
 }}
 
 SELECT
-    COALESCE(ca.canal, 'N.I') AS nome_canal,
+    COALESCE(ca.canal,'FACEBOOK') AS nome_canal,
     pr.categoria,
     SUM(ip.quantidade) AS quantidade_vendida,
     ROUND(SUM(ip.preco_unitario * ip.quantidade), 2) AS valor_total

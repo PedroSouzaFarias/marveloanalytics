@@ -7,8 +7,8 @@
 }}
 
 SELECT
-    coalesce(ca.nome_campanha, 'N.I') as nome_campanha,
-    coalesce(ca.canal, 'N.I') as nome_canal,
+    coalesce(ca.nome_campanha, 'CAMPANHA 21') as nome_campanha,
+    coalesce(ca.canal, 'FACEBOOK') as nome_canal,
     EXTRACT(MONTH FROM us.data_cadastro) AS mes_cadastro,
     COUNT(us.id_usuario) AS qtd_usuario
 FROM {{ ref('stg_usuario') }} us
